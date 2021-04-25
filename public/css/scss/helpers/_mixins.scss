@@ -1,0 +1,54 @@
+// Mixins
+
+@mixin opacity($opacity : 1) {
+  -webkit-opacity : $opacity;
+  -moz-opacity : $opacity;
+  opacity : $opacity;
+}
+
+@mixin rotate($deg : 0) {
+  -webkit-transform : rotate($deg);
+  -moz-transform : rotate($deg);
+  -ms-transform : rotate($deg);
+  -o-transform : rotate($deg);
+  transform : rotate($deg);
+}
+
+@mixin scale($ratio : 1) {
+  -webkit-transform : scale($ratio);
+  -moz-transform : scale($ratio);
+  -ms-transform : scale($ratio);
+  -o-transform : scale($ratio);
+  transform : scale($ratio);
+}
+
+@mixin translate($x: 0, $y: 0) {
+  -webkit-transform : translate($x, $y);
+  -moz-transform : translate($x, $y);
+  -ms-transform : translate($x, $y);
+  -o-transform : translate($x, $y);
+  transform : translate($x, $y);
+}
+
+@mixin transition($transition : .3s all ease-in-out) {
+  -webkit-transition : $transition;
+  -moz-transition : $transition;
+  -ms-transition : $transition;
+  -o-transition : $transition;
+  transition : $transition;
+}
+
+@mixin user-select($select : all) {
+  -webkit-user-select : $select;
+  -moz-user-select : $select;
+  -o-user-select : $select;
+  user-select : $select;
+}
+
+@mixin pre($property, $value) {
+  -webkit-#{$property}:$value;
+  -moz-#{$property}:$value;
+  -ms-#{$property}:$value;
+  -o-#{$property}:$value;
+  #{$property}:$value;
+}

@@ -1,0 +1,23 @@
+{
+    "name": "brahim_elhoube/my_framework",
+    "description": "Simple php framework to start building projects",
+    "type": "framework",
+    "authors": [
+        {
+            "name": "Brahim Elhoube",
+            "email": "brahim.elhoube@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "app\\": "."
+        }
+    },
+  "require": {
+    "ext-ctype": "*",
+    "ext-json": "*",
+    "ext-pdo": "*",
+    "ext-fileinfo": "*",
+        "ralouphie/mimey": "^2.1"
+  }
+}

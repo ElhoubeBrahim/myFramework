@@ -1,0 +1,26 @@
+/* =================== Forms Elements Styles =================== */
+
+input,
+textarea {
+  width: 100%;
+  border: 1px $bc solid;
+  padding: 5px 10px;
+  font: inherit;
+  border-radius: 4px;
+  outline: none;
+}
+
+textarea {
+  height: 300px;
+  min-height: 300px;
+  resize: vertical;
+}
+
+button {
+  font: inherit;
+  border: 1px $bc solid;
+  border-radius: 4px;
+  padding: 10px 30px;
+  cursor: pointer;
+}
+

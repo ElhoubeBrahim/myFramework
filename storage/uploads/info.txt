@@ -1,0 +1,2 @@
+This directory will contain uploaded files in the server
+You can change the default upload directory in /config/config.php

@@ -1,0 +1,21 @@
+/* =================== Main Styles =================== */
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $bg-color;
+  font-family: $main-font;
+  font-size: 1.2rem;
+  color: $text-color;
+  line-height: 1.5;
+}
+
+ul, ol, li {
+  list-style: none;
+}
+
+

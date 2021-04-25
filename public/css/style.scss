@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+@import "scss/helpers/variables";
+@import "scss/helpers/mixins";
+@import "scss/helpers/fonts";
+@import "scss/helpers/reset";
+
+@import "scss/global/main";
+@import "scss/global/forms";
+@import "scss/global/links";
+@import "scss/global/tables";
+
+@import "scss/layouts/header";
+@import "scss/layouts/footer";
+
+@import "scss/pages/home";
+@import "scss/pages/not_found";

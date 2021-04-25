@@ -1,0 +1,58 @@
+/* =================== Home Page Styles =================== */
+
+main.home-page {
+  height: 100%;
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .container {
+	padding: 100px;
+	border: 1px $bc solid;
+	border-radius: 4px;
+	text-align: center;
+	background-color: #fff;
+	box-shadow: 0 0 10px #eee;
+
+	.title {
+	  font-size: 2rem;
+	  margin-bottom: 1rem;
+
+	  span {
+		font-size: 1rem;
+		color: #aaa;
+	  }
+	}
+
+	.description {
+	  line-height: 2;
+	  margin-bottom: 1rem;
+	}
+
+	.links {
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+
+	  li a {
+		height: 45px;
+		width: 45px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 50%;
+		margin: 0 10px;
+		color: #fff;
+		@include transition();
+
+		&:hover,
+		&:focus,
+		&:active {
+		  filter: brightness(50%);
+		}
+	  }
+	}
+  }
+}
