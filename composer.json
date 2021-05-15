@@ -18,6 +18,12 @@
     "ext-json": "*",
     "ext-pdo": "*",
     "ext-fileinfo": "*",
-        "ralouphie/mimey": "^2.1"
+        "ralouphie/mimey": "^2.1",
+        "phpmailer/phpmailer": "^6.4",
+        "google/apiclient": "^2.0",
+        "php-http/curl-client": "^2.2",
+        "guzzlehttp/psr7": "^1.8",
+        "league/oauth2-facebook": "^2.0",
+    "ext-curl": "*"
   }
 }

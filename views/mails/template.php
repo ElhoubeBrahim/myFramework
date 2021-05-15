@@ -1,1 +1,1 @@
-<h1>Email template</h1>
+hello <?= isset($user) ? $user : 'anonymous' ?>

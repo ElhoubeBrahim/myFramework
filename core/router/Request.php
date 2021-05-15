@@ -2,6 +2,7 @@
 
 	namespace app\core\router;
 	use app\core\Application;
+	use app\core\auth\Session;
 	use app\core\filesystem\FS;
 	use app\core\validation\Validator;
 
@@ -40,6 +41,16 @@
 		public $fs;
 
 		/**
+		 * FS instance
+		 * @var Session $fs
+		 */
+		public $session;
+		/**
+		 * @var \app\core\mailer\Mail
+		 */
+		public $mailer;
+
+		/**
 		 * Request constructor
 		 */
 		public function __construct() {
@@ -67,6 +78,10 @@
 			$this->validator = new Validator($this);
 			// Create new FS instance
 			$this->fs = new FS(Application::$app->uploads_dir);
+			// Get session
+			$this->session = Application::$app->session;
+			// Get mailer
+			$this->mailer = Application::$app->mailer;
 		}
 
 		/**
@@ -171,6 +186,30 @@
 		 */
 		public function file($name) {
 			return $this->files[$name][0] ?? [];
+		}
+
+		/**
+		 * Get data from an api using POST request
+		 * @param $url
+		 * @param null $params
+		 * @param array $headers
+		 * @return array
+		 */
+		public function api($url, $params = null, $headers = []) {
+			// Set request url
+			$ch = curl_init($url);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+
+			// Set request post data
+			if ($params)
+				curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
+
+			// Set request headers
+			$headers[] = 'Accept: application/json';
+			curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+			// Get JSON data
+			return json_decode(curl_exec($ch));
 		}
 
 		/**

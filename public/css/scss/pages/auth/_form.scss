@@ -1,0 +1,62 @@
+/* =================== Auth Forms Styles =================== */
+
+form.auth-form {
+  width: 70%;
+  padding: 20px;
+  margin: 100px auto;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px #ddd solid;
+
+  .oauth {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	.icon {
+	  height: 45px;
+	  width: 45px;
+	  border-radius: 50%;
+	  border: 1px #ddd solid;
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  margin: 10px;
+	  cursor: pointer;
+	  transition: .3s all ease-in-out;
+
+	  &:hover {
+		background-color: #fafafa;
+	  }
+	}
+  }
+
+  .input-gp {
+	margin-bottom: 15px;
+
+	label {
+	  font-size: 1rem;
+	}
+	
+	input {
+	  background-color: #fafafa;
+	}
+  }
+
+  .remember {
+	margin-bottom: 15px;
+
+	label {
+	  font-size: .80rem;
+	}
+
+	input {
+	  width: initial;
+	}
+  }
+
+  .feedback {
+	font-size: .80rem;
+	color: $danger-color;
+  }
+}

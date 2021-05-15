@@ -16,7 +16,7 @@
 		 * Path to views
 		 * @var $views_path
 		 */
-		private $views_path;
+		public $views_path;
 		/**
 		 * Default layout
 		 * @var null $layout
@@ -31,42 +31,20 @@
 			$this->views_path = $path;
 		}
 
-		/**
-		 * Get the content of selected layout
-		 * @param $layout
-		 * @param $data
-		 * @return false|string
-		 */
-		private function get_layout_content($layout, $data) {
+		public function get_content($path, $data) {
 			// Define parsed variables
 			foreach ($data as $var => $value) {
 				$$var = $value;
 			}
 
-			// Open the buffer
-			ob_start();
-			// Include the layout file
-			include("$this->views_path/layouts/$layout.php");
-			// Clean the buffer and get content
-			return ob_get_clean();
-		}
-
-		/**
-		 * Get the content of selected view
-		 * @param $view
-		 * @param $data
-		 * @return false|string
-		 */
-		private function get_view_content($view, $data) {
-			// Define parsed variables
-			foreach ($data as $var => $value) {
-				$$var = $value;
-			}
+			// Parse flash messages
+			$flash = Application::$app->session->get('flash');
+			Application::$app->session->unset('flash');
 
 			// Open the buffer
 			ob_start();
 			// Include the view
-			include("$this->views_path/$view.php");
+			include($path);
 			// Clean the buffer and get content
 			return ob_get_clean();
 		}
@@ -77,14 +55,14 @@
 		 * @param $data
 		 * @return string
 		 */
-		private function get_content($view, $data) {
+		private function output($view, $data) {
 			// Get the selected view content
-			$view_content = $this->get_view_content($view, $data);
+			$view_content = $this->get_content("$this->views_path/$view.php", $data);
 
 			// If the layout is valid
 			if (is_string($this->layout) and $this->layout != null) {
 				// Get the selected layout content
-				$layout_content = $this->get_layout_content($this->layout, $data);
+				$layout_content = $this->get_content("$this->views_path/layouts/$this->layout.php", $data);
 				// Replace the content placeholder and return result
 				return str_replace('{{ @content }}', $view_content, $layout_content);
 			}
@@ -108,7 +86,7 @@
 		 */
 		public function render($view, $data = []) {
 			// Get content
-			$content = $this->get_content($view, $data);
+			$content = $this->output($view, $data);
 			// Output the content
 			echo $content;
 			// Init layout

@@ -14,15 +14,20 @@
 		// Application properties
 		public $dir;
 		public $uploads_dir;
+		public  $url;
 		public static $app;
 
 		// Application main classes
+		public $session;
+		public $mailer;
 		public $router;
 		public $request;
 		public $response;
 		public $view;
 		public $controller;
 		public $database;
+		public $user;
+		public $auth;
 
 		// Application lang properties
 		public $lang;
@@ -38,6 +43,7 @@
 			// Get application properties
 			$this->dir = $dir;
 			$this->uploads_dir = $dir . $config['app']['uploads'] ?? '/';
+			$this->url = $config['app']['url'] ?? '/';
 			self::$app = $this;
 
 			// Get application lang directories
@@ -46,6 +52,8 @@
 			$this->dictionary = require("$this->lang_path/$this->lang.php");
 
 			// Instantiate main classes
+			$this->session = new auth\Session();
+			$this->mailer = new mailer\Mail($config['mailer']);
 			$this->request = new router\Request();
 			$this->response = new router\Response();
 			$this->router = new router\Router($this->request, $this->response);
@@ -53,6 +61,8 @@
 			$this->controller = new mvc\Controller();
 			$provider = $config['database']['provider'];
 			$this->database = new database\Database($config['database'][$provider] ?? []);
+			$this->user = new auth\User($config['auth']);
+			$this->auth = new auth\Auth();
 		}
 
 		/**

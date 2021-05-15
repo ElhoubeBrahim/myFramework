@@ -6,6 +6,7 @@
 	 */
 
 	namespace app\controllers;
+	use app\core\Application;
 	use app\core\mvc\Controller;
 
 
@@ -16,6 +17,13 @@
 			$res->set_layout('main');
 			$res->render('home', [
 				'title' => 'My Framework | Home'
+			]);
+		}
+
+		public function dashboard($req, $res) {
+			$res->set_layout('main');
+			$res->render('auth/dashboard', [
+				'title' => 'My Framework | Dashboard'
 			]);
 		}
 

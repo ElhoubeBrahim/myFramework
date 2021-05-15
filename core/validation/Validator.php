@@ -19,7 +19,7 @@
 		 */
 		private $rules = [
 			'email', 'url',
-			'required',
+			'required', 'unique',
 			'min', 'max', 'between',
 			'length', 'min_length', 'max_length',
 			'words', 'min_words', 'max_words',

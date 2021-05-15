@@ -12,6 +12,11 @@
 	</head>
 
 	<body>
+        <?php if (isset($flash)) : ?>
+          <pre>
+              <?php print_r($flash); ?>
+          </pre>
+        <?php endif; ?>
 		{{ @content }}
 
         <script src="/js/script.js"></script>

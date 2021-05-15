@@ -3,6 +3,7 @@
 
 	namespace app\core\validation;
 
+	use app\core\Application;
 	use app\core\filesystem\FS;
 	use app\core\router\Request;
 
@@ -48,6 +49,36 @@
 			if (empty($value)) {
 				// Set required validation error
 				$message = $this->messages['required'] ?? '';
+				$message = str_replace('{field}', $name, $message);
+				$this->set_error($name, $message);
+				// Turn invalid flag on
+				$this->invalid = true;
+			}
+		}
+
+		/**
+		 * @param $data
+		 * @param string $table
+		 */
+		protected function unique($data, $table = '') {
+			// Get field name
+			$name = $data[0];
+			// Get field value
+			$value = $data[1];
+			// Get Database instance
+			$DB = Application::$app->database;
+
+			// Execute COUNT query
+			$DB->table($table);
+			$result = $DB->select([
+				'columns' => ['COUNT(*) as n'],
+				'where' => ["$name" => $value]
+			]);
+
+			// Check if there is results
+			if ($result[0]['n'] > 0) {
+				// Set unique validation error
+				$message = $this->messages['unique'] ?? '';
 				$message = str_replace('{field}', $name, $message);
 				$this->set_error($name, $message);
 				// Turn invalid flag on
@@ -371,29 +402,6 @@
 				$message = $this->messages['not_regex'] ?? '';
 				$message = str_replace('{field}', $name, $message);
 				$message = str_replace('{pattern}', $pattern, $message);
-				$this->set_error($name, $message);
-				// Turn invalid flag on
-				$this->invalid = true;
-			}
-		}
-
-		/**
-		 * @param $data
-		 * @param string $table
-		 * @param string $column
-		 */
-		protected function unique($data, $table = '', $column = '') {
-			// Get field name
-			$name = $data[0];
-			// Get field value
-			$value = $data[1];
-
-			$result = [];
-
-			if (count($result) > 0) {
-				// Set unique validation error
-				$message = $this->messages['unique'] ?? '';
-				$message = str_replace('{field}', $name, $message);
 				$this->set_error($name, $message);
 				// Turn invalid flag on
 				$this->invalid = true;
