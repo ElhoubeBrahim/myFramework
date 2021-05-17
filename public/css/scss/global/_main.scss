@@ -18,4 +18,26 @@ ul, ol, li {
   list-style: none;
 }
 
+.alert {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  padding: 10px;
+  background-color: #eee;
+  border-bottom: 1px #ddd solid;
+  cursor: pointer;
 
+  &.alert-success {
+    background-color: lighten($success-color, 10);
+    border-color: $success-color;
+    color: #fff;
+  }
+
+  &.alert-danger {
+    background-color: lighten($danger-color, 10);
+    border-color: $danger-color;
+    color: #fff;
+  }
+}

@@ -19,9 +19,5 @@
 	// Get defined routes
 	require('../routes/routes.php');
 
-	echo '<pre>';
-	print_r($_SESSION);
-	echo '</pre>';
-
 	// Run the application
 	$app->run();

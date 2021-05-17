@@ -54,7 +54,7 @@
 			$this->dictionary = require("$this->lang_path/$this->lang.php");
 
 			// Instantiate main classes
-			$this->session = new auth\Session();
+			$this->session = new session\Session();
 			$this->mailer = new mailer\Mail($config['mailer']);
 			$this->request = new router\Request();
 			$this->response = new router\Response();

@@ -1,7 +1,7 @@
 <?php
 
 
-	namespace app\core\auth;
+	namespace app\core\session;
 
 
 	/**
@@ -11,6 +11,8 @@
 	class Session
 	{
 
+		public $flash;
+
 		/**
 		 * Session constructor
 		 */
@@ -18,6 +20,8 @@
 			// Start session
 			session_start();
 			session_regenerate_id();
+			// Get flash class
+			$this->flash = new Flash();
 		}
 
 		/**
@@ -65,28 +69,6 @@
 		}
 
 		/**
-		 * Add content to flash messages
-		 * @param $key
-		 * @param $value
-		 */
-		public function flash($key, $value) {
-			$_SESSION['flash'][$key] = $value;
-		}
-
-		/**
-		 * Get flash message content
-		 * @param $key
-		 * @return mixed|null
-		 */
-		public function get_flash($key) {
-			if ($this->has('flash')) {
-				return $_SESSION['flash'][$key] ?? null;
-			}
-
-			return null;
-		}
-
-		/**
 		 * Destroy the session
 		 */
 		public function destroy() {
@@ -98,6 +80,22 @@
 		 */
 		public function empty() {
 			$_SESSION = [];
+		}
+
+		/**
+		 * Set and get flash messages
+		 * @param $key
+		 * @param null $value
+		 * @param int $usage
+		 * @return mixed|null
+		 */
+		public function flash($key, $value = null, $usage = 1) {
+			if ($value) {
+				$this->flash->set($key, $value, $usage);
+				return null;
+			}
+
+			return $this->flash->get($key);
 		}
 
 	}

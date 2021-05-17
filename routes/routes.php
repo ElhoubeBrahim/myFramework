@@ -22,7 +22,5 @@
 	$router->get('/dashboard', [homeController::class, 'dashboard'])
 		->middlewares(guest::class);
 
-	$router->get('/email', [homeController::class, 'email']);
-
 	require 'auth.php';
 	require 'oauth.php';

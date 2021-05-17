@@ -12,11 +12,18 @@
 	</head>
 
 	<body>
-        <?php if (isset($flash)) : ?>
-          <pre>
-              <?php print_r($flash); ?>
-          </pre>
+        <?php if (isset($flash['success'])) : ?>
+          <div class="alert alert-success" onclick="this.remove()">
+	          <?= $flash['success']['value'] ?>
+          </div>
         <?php endif; ?>
+
+        <?php if (isset($flash['danger'])) : ?>
+            <div class="alert alert-danger" onclick="this.remove()">
+			        <?= $flash['danger']['value'] ?>
+            </div>
+        <?php endif; ?>
+
 		{{ @content }}
 
         <script src="/js/script.js"></script>
