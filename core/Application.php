@@ -15,6 +15,7 @@
 		public $dir;
 		public $uploads_dir;
 		public  $url;
+		public $config;
 		public static $app;
 
 		// Application main classes
@@ -41,6 +42,7 @@
 		 */
 		public function __construct($dir, $config = []) {
 			// Get application properties
+			$this->config = $config;
 			$this->dir = $dir;
 			$this->uploads_dir = $dir . $config['app']['uploads'] ?? '/';
 			$this->url = $config['app']['url'] ?? '/';

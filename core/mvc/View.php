@@ -39,7 +39,6 @@
 
 			// Parse flash messages
 			$flash = Application::$app->session->get('flash');
-			Application::$app->session->unset('flash');
 
 			// Open the buffer
 			ob_start();

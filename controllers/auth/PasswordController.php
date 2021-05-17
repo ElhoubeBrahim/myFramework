@@ -4,6 +4,8 @@
 	namespace app\controllers\auth;
 	use app\core\Application;
 	use app\core\mvc\Controller;
+	use app\models\auth\password\ForgotPasswordModel;
+	use app\models\auth\password\ResetPasswordModel;
 
 
 	class PasswordController extends Controller
@@ -17,43 +19,18 @@
 		}
 
 		public function forgot($req, $res) {
+			// Sanitize sent data
 			$req->body = Application::sanitize($req->body);
-			$valid = $req->validate([
-				'email' => ['required', 'email']
-			]);
+			// Get forgot password model
+			$Password = new ForgotPasswordModel(['email' => $req->body['email']]);
 
-			if (!$valid) {
-				$this->render_forgot($req, $res);
-			}
+			// Validate email
+			$Password->validate();
 
-			// Get user class
-			$User = Application::$app->user;
+			// Generate and send reset token
+			$Password->token();
 
-			// Get sent email
-			$email = $req->body['email'];
-
-			// Check if there is no valid token
-			if (
-				!$User->has_token($User->id('email', $email), 'p') &&
-				$User->exists('email', $email)
-			) {
-				// Get user data
-				$user = $User->get_info('email', $email);
-				// Generate new token
-				$token = $User->token
-					->generate()
-					->store($user['id'], 'p');
-				// Send email
-				$req->mailer->to($email)
-					->subject('Reset password')
-					->view('mails/reset-password', [
-						'username' => $user['name'],
-						'id' => $user['id'],
-						'token' => $token
-					])->send();
-			}
-
-			$req->session->flash('success', 'We had been sent a reset link to your email');
+			// Redirect to home
 			$res->redirect('/');
 		}
 
@@ -72,34 +49,20 @@
 			// Sanitize sent data
 			$req->body = Application::sanitize($req->body);
 			$req->params = Application::sanitize($req->params);
-			// Get id and token
-			$id = $req->params['id'] ?? null;
-			$token = $req->params['token'] ?? null;
 
-			// Validate passwords
-			$valid = $req->validate([
-				'password' => ['required', 'min_length:8'],
-				'confirm' => ['same:password']
+			// Get reset password model
+			$Password = new ResetPasswordModel([
+				'id' => $req->params['id'] ?? null,
+				'token' => $req->params['token'] ?? null,
+				'password' => $req->body['password']
 			]);
 
-			// If is not valid
-			if (!$valid) {
-				// Render reset
-				$this->render_reset($req, $res);
-				return;
-			}
 
-			// Get user class
-			$User = Application::$app->user;
+			// Validate passwords
+			$Password->validate();
 
 			// Verify token
-			if ($User->token->verify($id, $token, 'p')) {
-				$User->password->update($id, $req->body['password']);
-				$User->token->remove($id, $token, 'p');
-				$req->session->flash('success', 'Password reset successfully');
-			} else {
-				$req->session->flash('error', 'We can\'t reset your password');
-			}
+			$Password->token();
 
 			// Redirect to login
 			$res->redirect('/login');

@@ -8,4 +8,10 @@
 	class myModel extends Model
 	{
 
+		public function test() {
+			echo '<pre>';
+			print_r($this);
+			echo '</pre>';
+		}
+
 	}

@@ -8,7 +8,6 @@ Happy code \*_\*
 ## TODO
 
 - Implement more FS - File System - methods
-- Implement Model class
 - Implement Logging class
 - Implement an Image class used to perform image actions - resize, rotate ...
 - Implement payment gateways

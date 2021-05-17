@@ -4,6 +4,7 @@
 	namespace app\controllers\auth;
 	use app\core\Application;
 	use app\core\mvc\Controller;
+	use app\models\auth\EmailModel;
 
 	class EmailController extends Controller
 	{
@@ -14,40 +15,15 @@
 				$res->redirect('/');
 			}
 
-			// Get email and User class
-			$User = Application::$app->user;
+			// Get email and Email Model class
 			$email = $req->session->get('email');
-
-			// Remove email from session
-			$req->session->unset('email');
+			$Email = new EmailModel(['email' => $email]);
 
 			// Check if email exists
-			if (
-				!$User->exists('email', $email) ||
-				$User->is_active('email', $email, 'active')
-			) {
-				$res->redirect('/');
-			}
+			$Email->exists();
 
 			// Check if there is no valid token
-			if (
-				!$User->has_token($User->id('email', $email), 'e')
-			) {
-				// Get user data
-				$user = $User->get_info('email', $email);
-				// Generate new token
-				$token = $User->token
-											->generate()
-											->store($user['id'], 'e');
-				// Send email
-				$req->mailer->to($email)
-					->subject('Verify email')
-					->view('mails/verify-email', [
-						'username' => $user['name'],
-						'id' => $user['id'],
-						'token' => $token
-					])->send();
-			}
+			$Email->token();
 
 			// Render the view
 			$res->set_layout('main');

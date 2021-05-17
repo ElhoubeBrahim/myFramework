@@ -4,6 +4,8 @@
 	namespace app\controllers\auth;
 	use app\core\Application;
 	use app\core\mvc\Controller;
+	use app\models\auth\LoginModel;
+	use app\models\auth\RegisterModel;
 
 	class RegisterController extends Controller
 	{
@@ -18,46 +20,29 @@
 		public function register($req, $res) {
 			// Sanitize sent data
 			$req->body = Application::sanitize($req->body);
-
-			// Validate user data
-			$valid = $req->validate([
-				'name' => ['required', 'min_length:3', 'max_length:255'],
-				'email' => ['required', 'email', 'max_length:255', 'unique:users'],
-				'password' => ['required', 'min_length:8']
-			]);
-
-			// If it is invalid
-			if (!$valid) {
-				// Render the register page with errors
-				$this->render($req, $res);
-				return;
-			}
-
-			// Else
-			// Get user class
-			$User = Application::$app->user;
-
-			// Create new user account
-			$User->create([
+			$User = new RegisterModel([
 				'name' => $req->body['name'],
-				'email' => $req->body['email'],
-				'password' => $User->password->hash($req->body['password'])
-			]);
-
-			if ($User->must_verify) {
-				$req->session->put('email', $req->body['email']);
-				$res->redirect("/verify/email");
-			}
-
-			// Login
-			$logged_in = $User->login([
 				'email' => $req->body['email'],
 				'password' => $req->body['password']
 			]);
 
-			if (!$logged_in) {
-				$res->redirect('/login');
-			}
+			// Validate user data
+			$User->validate();
+
+			// Register user
+			$User->register();
+
+			// Get login model
+			$User = new LoginModel([
+				'email' => $req->body['email'],
+				'password' => $req->body['password']
+			]);
+
+			// Verify new account
+			$User->verify($req, $res);
+
+			// Login user
+			$User->login($req, $res);
 
 			// Redirect to the dashboard
 			$res->redirect('/dashboard');
