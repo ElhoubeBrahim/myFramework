@@ -3,6 +3,7 @@
 
 	namespace app\core\mvc;
 	use app\core\Application;
+	use function Clue\StreamFilter\fun;
 
 
 	/**
@@ -38,7 +39,10 @@
 			}
 
 			// Parse flash messages
-			$flash = Application::$app->session->get('flash');
+			$flash = Application::$app->session->get('flash') ?? [];
+			foreach ($flash as $key => $data) {
+				$flash[$key] = $flash[$key]['value'];
+			}
 
 			// Open the buffer
 			ob_start();

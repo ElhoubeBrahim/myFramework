@@ -14,13 +14,13 @@
 	<body>
         <?php if (isset($flash['success'])) : ?>
           <div class="alert alert-success" onclick="this.remove()">
-	          <?= $flash['success']['value'] ?>
+	          <?= $flash['success'] ?>
           </div>
         <?php endif; ?>
 
         <?php if (isset($flash['danger'])) : ?>
             <div class="alert alert-danger" onclick="this.remove()">
-			        <?= $flash['danger']['value'] ?>
+			        <?= $flash['danger'] ?>
             </div>
         <?php endif; ?>
 
