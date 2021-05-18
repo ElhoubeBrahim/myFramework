@@ -5,7 +5,7 @@
 	$form = new Form([
 		'attributes' => [
 			'method' => 'POST',
-			'action' => '/login',
+			'action' => (isset($next)) ? "/login?next=$next" : "/login",
 			'class' => 'auth-form'
 		],
 		'field_container' => ['<div class="input-gp">', '</div>'],

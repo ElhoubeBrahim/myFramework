@@ -31,6 +31,7 @@
 			$Password->token();
 
 			// Redirect to home
+			$req->session->flash('success', 'We had been sent reset email to ' . $req->body['email'] . ' Please check your inbox');
 			$res->redirect('/');
 		}
 

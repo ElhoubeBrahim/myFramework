@@ -20,7 +20,7 @@
 			$Auth = Application::$app->auth;
 
 			if ($Auth->auth()) {
-				$res->redirect('/dashboard');
+				$res->redirect('/profile');
 			}
 		}
 	}

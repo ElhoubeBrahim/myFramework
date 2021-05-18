@@ -18,9 +18,9 @@
           </div>
         <?php endif; ?>
 
-        <?php if (isset($flash['danger'])) : ?>
+        <?php if (isset($flash['error'])) : ?>
             <div class="alert alert-danger" onclick="this.remove()">
-			        <?= $flash['danger'] ?>
+			        <?= $flash['error'] ?>
             </div>
         <?php endif; ?>
 

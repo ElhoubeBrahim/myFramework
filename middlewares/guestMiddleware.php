@@ -20,7 +20,8 @@
 			$Auth = Application::$app->auth;
 
 			if ($Auth->guest()) {
-				$res->redirect('/login');
+				$req->session->flash('error', 'Please login to continue');
+				$res->redirect('/login?next=' . urlencode($req->path()));
 			}
 		}
 	}

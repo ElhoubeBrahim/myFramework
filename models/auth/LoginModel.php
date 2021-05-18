@@ -45,6 +45,7 @@
 			// If sent credentials are wrong
 			if (!$logged_in) {
 				// Render the login page with error
+				$req->session->flash('error', 'Wrong credentials');
 				$res->redirect('/login');
 				return;
 			}
@@ -76,6 +77,7 @@
 		}
 
 		public function invalid($req, $res) {
+			$req->session->flash('error', 'Validation failed', 0);
 			$controller = new LoginController();
 			$controller->render($req, $res);
 			return;

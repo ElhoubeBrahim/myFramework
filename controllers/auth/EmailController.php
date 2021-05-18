@@ -43,11 +43,11 @@
 
 			// Verify token
 			if ($User->token->verify($id, $token, 'e')) {
-				 $User->activate($id, 'active');
-				 $User->token->remove($id, $token, 'e');
+				$User->activate($id, 'active');
+				$User->token->remove($id, $token, 'e');
 				$req->session->flash('success', 'Account activated successfully');
 			} else {
-				$req->session->flash('error', 'We can\'t activate your account');
+				$req->session->flash('error', 'We can not activate your account');
 			}
 
 			// Redirect to login

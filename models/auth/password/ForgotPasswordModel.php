@@ -63,6 +63,7 @@
 		}
 
 		public function invalid($req, $res) {
+			$req->session->flash('error', 'Validation failed', 0);
 			$controller = new PasswordController();
 			$controller->render_forgot($req, $res);
 			return;

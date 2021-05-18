@@ -24,7 +24,8 @@
 				'title' => 'My Framework | Login',
 				'google' => $google,
 				'facebook' => $facebook,
-				'github' => $github
+				'github' => $github,
+				'next' => Application::sanitize($req->params['next'] ?? null)
 			]);
 		}
 
@@ -51,6 +52,10 @@
 			$User->remember($req, $res);
 
 			// Redirect to dashboard
+			if (isset($req->params['next'])) {
+				$res->redirect(Application::sanitize($req->params['next']));
+			}
+
 			$res->redirect('/profile');
 		}
 
@@ -61,6 +66,7 @@
 			// Destroy remember me cookie
 			Application::$app->user->forget();
 			// Redirect to home
+			$req->session->flash('success', 'Have a nice day *_*');
 			$res->redirect('/');
 		}
 

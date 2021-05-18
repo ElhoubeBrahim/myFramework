@@ -24,20 +24,20 @@ ul, ol, li {
   left: 0;
   right: 0;
   width: 100%;
-  padding: 10px;
+  padding: 15px 20px;
   background-color: #eee;
   border-bottom: 1px #ddd solid;
   cursor: pointer;
 
   &.alert-success {
-    background-color: lighten($success-color, 10);
-    border-color: $success-color;
-    color: #fff;
+    background-color: #d4edda;
+    border-color: #1557245e;
+    color: #155724;
   }
 
   &.alert-danger {
-    background-color: lighten($danger-color, 10);
-    border-color: $danger-color;
-    color: #fff;
+    background-color: #f8d7da;
+    border-color: #721c245e;
+    color: #721c24;
   }
 }

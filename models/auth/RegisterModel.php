@@ -42,6 +42,7 @@
 		}
 
 		public function invalid($req, $res) {
+			$req->session->flash('error', 'Validation error', 0);
 			$controller = new RegisterController();
 			$controller->render($req, $res);
 			return;
