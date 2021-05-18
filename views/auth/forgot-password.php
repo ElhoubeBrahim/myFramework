@@ -14,6 +14,8 @@
 
 	$form->begin();
 
+	echo '<div class="title">Please enter your email to get reset password link</div>';
+
 	$form->field([
 		'type' => 'email',
 		'name' => 'email',

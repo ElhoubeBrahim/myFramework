@@ -31,7 +31,7 @@
 			}
 
 			// Redirect to dashboard
-			$res->redirect('/dashboard');
+			$res->redirect('/profile');
 		}
 
 	}

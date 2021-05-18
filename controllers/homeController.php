@@ -20,10 +20,12 @@
 			]);
 		}
 
-		public function dashboard($req, $res) {
+		public function profile($req, $res) {
+			$user = Application::$app->user->get_info();
 			$res->set_layout('main');
-			$res->render('auth/dashboard', [
-				'title' => 'My Framework | Dashboard'
+			$res->render('auth/profile', [
+				'title' => 'My Framework | Profile',
+				'user' => $user
 			]);
 		}
 

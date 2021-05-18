@@ -83,7 +83,8 @@
 		 * @param $value
 		 * @return array|mixed
 		 */
-		public function get_info($field, $value) {
+		public function get_info($field = 'id', $value = null) {
+			$value = $value ?? $_SESSION['user']['id'];
 			$this->DB->table($this->table);
 			return $this->DB->select([
 				'columns' => ['*'],

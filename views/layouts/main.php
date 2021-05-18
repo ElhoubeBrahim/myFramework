@@ -1,4 +1,4 @@
-<!DOCTYPE HTML5>
+<!DOCTYPE HTML>
 <html lang="<?= app\core\Application::$app->lang; ?>">
 
 	<head>
@@ -23,6 +23,25 @@
 			        <?= $flash['danger'] ?>
             </div>
         <?php endif; ?>
+
+        <header class="page-header">
+            <div class="brand">
+                <a href="/">
+                    <img src="/media/images/logo.svg" alt="myFramework" height="40" width="40">
+                </a>
+            </div>
+            <?php if (\app\core\Application::$app->auth->guest()): ?>
+                <ul class="nav">
+                    <li class="login"><a href="/login">Login</a></li>
+                    <li class="register"><a href="/register">Register</a></li>
+                </ul>
+            <?php else: ?>
+                <ul class="nav">
+                    <li class="profile"><a href="/profile">Profile</a></li>
+                    <li class="logout"><a href="/logout">Logout</a></li>
+                </ul>
+            <?php endif; ?>
+        </header>
 
 		{{ @content }}
 

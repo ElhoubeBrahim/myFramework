@@ -1,9 +1,8 @@
 /* =================== Home Page Styles =================== */
 
 main.home-page {
-  height: 100%;
   width: 80%;
-  margin: 0 auto;
+  margin: 100px auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,9 +49,26 @@ main.home-page {
 		&:hover,
 		&:focus,
 		&:active {
-		  filter: brightness(50%);
+		  box-shadow: 0 0 0 3px #ddd;
 		}
 	  }
+	}
+  }
+}
+
+main.profile-page {
+
+  .welcome {
+	width: 50%;
+	margin: 100px auto;
+	padding: 20px;
+	background-color: #fff;
+	border: 1px #ddd solid;
+	border-radius: 5px;
+	text-align: center;
+
+	span.user {
+	  color: $info-color;
 	}
   }
 }

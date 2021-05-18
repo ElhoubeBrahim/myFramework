@@ -19,7 +19,7 @@
 		// Action => homeController->home(Request, Response)
 	$router->get('/', [homeController::class, 'home']);
 
-	$router->get('/dashboard', [homeController::class, 'dashboard'])
+	$router->get('/profile', [homeController::class, 'profile'])
 		->middlewares(guest::class);
 
 	require 'auth.php';

@@ -14,6 +14,8 @@
 
 	$form->begin();
 
+	echo '<div class="title">Create new account</div>';
+
 	$form->field([
 	  'type' => 'text',
       'name' => 'name',

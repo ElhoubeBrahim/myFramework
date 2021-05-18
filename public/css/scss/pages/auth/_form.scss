@@ -2,11 +2,22 @@
 
 form.auth-form {
   width: 70%;
-  padding: 20px;
+  padding: 0 20px 20px;
   margin: 100px auto;
   background-color: #fff;
   border-radius: 5px;
   border: 1px #ddd solid;
+  overflow: hidden;
+
+  .title {
+	font-size: 1.5rem;
+	text-align: center;
+	padding: 10px;
+	margin: 0 -20px;
+	margin-bottom: 10px;
+	background-color: #fafafa;
+	border-bottom: 1px #ddd solid;
+  }
 
   .oauth {
 	display: flex;
@@ -23,10 +34,27 @@ form.auth-form {
 	  align-items: center;
 	  margin: 10px;
 	  cursor: pointer;
-	  transition: .3s all ease-in-out;
+	  @include transition();
 
-	  &:hover {
-		background-color: #fafafa;
+	  &.google:hover {
+		background-color: #f4b400;
+		color: #fff;
+		border-color: darken(#f4b400, 5);
+		box-shadow: 0 0 0 3px lighten(#f4b400, 30);
+	  }
+
+	  &.facebook:hover {
+		background-color: #4267b2;
+		color: #fff;
+		border-color: darken(#4267b2, 5);
+		box-shadow: 0 0 0 3px lighten(#4267b2, 30);
+	  }
+
+	  &.github:hover {
+		background-color: #333;
+		color: #fff;
+		border-color: darken(#333, 5);
+		box-shadow: 0 0 0 3px #ccc;
 	  }
 	}
   }
@@ -35,28 +63,87 @@ form.auth-form {
 	margin-bottom: 15px;
 
 	label {
+	  margin-bottom: 5px;
+	  display: block;
 	  font-size: 1rem;
 	}
 	
 	input {
-	  background-color: #fafafa;
+	  background-color: lighten($main-color, 45);
+
+	  &.invalid {
+	  	border: 1px $danger-color solid;
+
+		&:focus {
+		  box-shadow: 0 0 0 3px lighten($danger-color, 40);
+		}
+	  }
 	}
   }
 
-  .remember {
-	margin-bottom: 15px;
+  .actions {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 
-	label {
+	.remember {
+	  margin-bottom: 15px;
+
+	  label {
+		font-size: .80rem;
+		cursor: pointer;
+
+		&:hover,
+		&:active {
+		  color: $main-color;
+		}
+	  }
+
+	  input {
+		width: initial;
+	  }
+	}
+
+	.forgot {
 	  font-size: .80rem;
+	  color: $main-color;
+
+	  &:hover,
+	  &:active {
+		text-decoration: underline;
+	  }
 	}
 
-	input {
-	  width: initial;
-	}
   }
 
   .feedback {
 	font-size: .80rem;
 	color: $danger-color;
+  }
+}
+
+.verify-email {
+  width: 60%;
+  margin: 100px auto;
+  text-align: center;
+  background-color: #fff;
+  border: 1px #ddd solid;
+  border-radius: 5px;
+  padding: 50px 20px;
+
+  .title {
+	text-align: center;
+	font-size: 1.5rem;
+	margin-bottom: 10px;
+  }
+
+  p {
+
+	span.email {
+	  background-color: #eee;
+	  border: 1px #ddd solid;
+	  border-radius: 4px;
+	  padding: 3px 7px;
+	}
   }
 }

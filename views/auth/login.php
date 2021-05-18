@@ -15,14 +15,16 @@
 	$form->begin();
 ?>
 
+    <div class="title">Login to account</div>
+
     <div class="oauth">
-        <a href="<?= isset($google) ? $google : '#' ?>" class="icon">
+        <a href="<?= isset($google) ? $google : '#' ?>" class="icon google">
             <i class="ri-google-line"></i>
         </a>
-        <a href="<?= isset($facebook) ? $facebook : '#' ?>" class="icon">
+        <a href="<?= isset($facebook) ? $facebook : '#' ?>" class="icon facebook">
             <i class="ri-facebook-line"></i>
         </a>
-        <a href="<?= isset($github) ? $github : '#' ?>" class="icon">
+        <a href="<?= isset($github) ? $github : '#' ?>" class="icon github">
             <i class="ri-github-line"></i>
         </a>
     </div>
@@ -45,10 +47,18 @@
 
 ?>
 
-	<div class="remember">
-		<input type="checkbox" name="remember" id="remember">
-		<label for="remember">Remember me</label>
-	</div>
+	<div class="actions">
+        <div class="remember">
+            <input type="checkbox" name="remember" id="remember">
+            <label for="remember">Remember me</label>
+        </div>
+
+        <div class="forgot">
+            <a href="/password/forgot">
+                Password forgotten ?
+            </a>
+        </div>
+    </div>
 
 <?php
 	echo '<button>Login</button>';

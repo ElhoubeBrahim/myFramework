@@ -4,10 +4,16 @@ input,
 textarea {
   width: 100%;
   border: 1px $bc solid;
-  padding: 5px 10px;
+  padding: 10px;
   font: inherit;
   border-radius: 4px;
   outline: none;
+  @include transition();
+
+  &:focus {
+    border-color: $main-color;
+    box-shadow: 0 0 0 3px lighten($main-color, 40);
+  }
 }
 
 textarea {
@@ -18,9 +24,19 @@ textarea {
 
 button {
   font: inherit;
-  border: 1px $bc solid;
   border-radius: 4px;
-  padding: 10px 30px;
+  padding: 5px 30px;
   cursor: pointer;
+  background-color: $main-color;
+  color: #fff;
+  border: 1px solid darken($main-color, 10);
+  box-shadow: 3px 3px 0 0 lighten($main-color, 30);
+  @include transition();
+
+  &:hover,
+  &:active {
+    box-shadow: none;
+    background-color: darken($main-color, 10);
+  }
 }
 

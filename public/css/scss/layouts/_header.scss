@@ -4,4 +4,68 @@ header.page-header {
   padding: 10px 20px;
   border-bottom: 1px $bc solid;
   background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .brand {
+
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  ul.nav {
+    display: flex;
+    align-items: center;
+
+    li {
+      margin: 0 5px;
+      @include user-select(none);
+
+      a {
+        display: block;
+        padding: 5px 20px;
+        border-radius: 4px;
+        transition: .3s all ease-in-out;
+        border: 1px #ddd solid;
+      }
+
+      &.register a {
+        background-color: $main-color;
+        color: #fff;
+        border-color: darken($main-color, 10);
+        box-shadow: 3px 3px 0 0 lighten($main-color, 30);
+
+        &:hover,
+        &:active {
+          box-shadow: none;
+        }
+      }
+
+      &.login a,
+      &.profile a {
+        box-shadow: 3px 3px 0 0 #eee;
+
+        &:hover,
+        &:active {
+          box-shadow: none;
+        }
+      }
+
+      &.logout a {
+        color: $danger-color;
+        border-color: darken($danger-color, 10);
+        box-shadow: 3px 3px 0 0 lighten($danger-color, 30);
+
+        &:hover,
+        &:active {
+          box-shadow: none;
+          background-color: lighten($danger-color, 40);
+        }
+      }
+    }
+  }
 }

@@ -14,6 +14,8 @@
 
 	$form->begin();
 
+	echo '<div class="title">Enter new password</div>';
+
 	$form->field([
 		'type' => 'password',
 		'name' => 'password',

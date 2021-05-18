@@ -51,7 +51,7 @@
 			$User->remember($req, $res);
 
 			// Redirect to dashboard
-			$res->redirect('/dashboard');
+			$res->redirect('/profile');
 		}
 
 		public function logout($req, $res) {

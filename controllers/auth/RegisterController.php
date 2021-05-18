@@ -45,7 +45,7 @@
 			$User->login($req, $res);
 
 			// Redirect to the dashboard
-			$res->redirect('/dashboard');
+			$res->redirect('/profile');
 		}
 
 	}
